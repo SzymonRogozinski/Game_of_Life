@@ -29,7 +29,21 @@ class Gui(object):
 
     def draw(self):
         print("Hello world")
-
+        if self.entry.get() is not '':
+            iteration = int(self.entry.get())
+            print(iteration)
+            self.entry.delete(0, END)
+            y = 0
+            for i, life in enumerate(self.iterations[iteration-1]):
+                print(y)
+                if life == 1:
+                    color = 'black'
+                else:
+                    color = 'white'
+                print(i*self.weight, y*self.weight, (i+1)*self.weight, (y+1)*self.weight, sep=' ')
+                self.canvas.create_rectangle((i%self.width)*self.weight, y*self.weight, (i%self.width+1)*self.weight, (y+1)*self.weight, outline=color, fill=color)
+                if (i+1)%(self.width) == 0:
+                    y = y + 1
 
 
     def display(self):
@@ -46,5 +60,10 @@ class Gui(object):
 
 
 if __name__=="__main__":
-    gui = Gui(400,300,[])
+    iters = []
+    iters.append([1,1,1,1,1,1,1,1,1])
+    iters.append([0,0,0,0,0,0,0,0,0])
+    iters.append([1,0,1,0,1,0,1,0,1])
+    iters.append([0,1,0,1,0,1,0,1,0])
+    gui = Gui(3,3,iterations=iters)
     gui.display()
