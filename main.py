@@ -1,9 +1,7 @@
-from GameStructures import Iteration
+from GameStructures import Game
 
 if __name__ == '__main__':
-    xd = Iteration(0,0)
-    xd.load_file("data.txt")
-
-    print(xd)
-
-
+    g = Game(10, 10, 5)
+    g.load_data("data.txt")
+    g.simulation()
+    print(g)
