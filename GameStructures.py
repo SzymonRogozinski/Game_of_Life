@@ -1,3 +1,4 @@
+from Gui import Gui
 from mpi4py import MPI
 
 class Game:
@@ -51,6 +52,10 @@ class Game:
                 iteration = Iteration()
                 iteration.set(packed)
                 self.iterations.append(iteration)
+                #print(self.iterations)
+        if id == 0:
+            gui = Gui(self.width, self.height, self.iterations)
+            gui.display();
 
     def __count_neighbour(self, x, y, data):
         old_iter = data.content
@@ -64,7 +69,7 @@ class Game:
         i = 0
         packages = []
         iteration = self.iterations[-1]
-        iteration.print(len(self.iterations)-1)
+        #iteration.print(len(self.iterations)-1)
         for index in indexes:
             d = [iteration.plane[j] for j in range(index[0], index[1]+1)]
             p = Pack(d, i)

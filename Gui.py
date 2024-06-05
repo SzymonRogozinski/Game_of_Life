@@ -28,19 +28,28 @@ class Gui(object):
 
 
     def draw(self):
-        print("Hello world")
         if self.entry.get() is not '':
             iteration = int(self.entry.get())
-            print(iteration)
+            if iteration < 0 or iteration >= len(self.iterations):
+                print("The iteration is out of range")
+                return
+            #print(self.iterations[iteration].plane)
+            iter = []
+            for row in self.iterations[iteration].plane:
+                for cell in row:
+                    if cell is True:
+                        iter.append(1)
+                    else:
+                        iter.append(0)
             self.entry.delete(0, END)
             y = 0
-            for i, life in enumerate(self.iterations[iteration-1]):
-                print(y)
+            for i, life in enumerate(iter):
+                #print(life)
                 if life == 1:
                     color = 'black'
                 else:
                     color = 'white'
-                print(i*self.weight, y*self.weight, (i+1)*self.weight, (y+1)*self.weight, sep=' ')
+                #print(i*self.weight, y*self.weight, (i+1)*self.weight, (y+1)*self.weight, sep=' ')
                 self.canvas.create_rectangle((i%self.width)*self.weight, y*self.weight, (i%self.width+1)*self.weight, (y+1)*self.weight, outline=color, fill=color)
                 if (i+1)%(self.width) == 0:
                     y = y + 1
